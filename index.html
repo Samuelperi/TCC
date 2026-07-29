@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ptbr">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="style.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="div1">
+            <fieldset>
+                <h1>Cadastro</h1>
+                <form method="post" action="dados.php" >
+                    <p><label for="Nome">Nome:</label>
+                    <input type="text" id="Nome" name="Nome" placeholder="Digite seu nome" required></p>
+    
+                    <p><label for="Email">Email:</label>
+                    <input type="text" id="Email" name="Email" placeholder="Digite seu email" required></p>
+    
+                    <p><label for="DtNas">Data de nascimento:</label>
+                    <input type="date" id="DtNas" name="DtNas" required></p>
+    
+                    <p><label for="Senha">Senha:</label>
+                    <input type="password" id="Senha" name="Senha" placeholder="Crie uma senha!" required></p>
+    
+                    <input type="submit" value="CADASTRAR" class="button">
+                </form>
+            </fieldset>
+        </div>
+        <fieldset></fieldset>
+    </body>
+</html>
