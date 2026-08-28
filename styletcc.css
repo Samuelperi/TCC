@@ -1,0 +1,316 @@
+/* ============================================================
+     FONTES
+     Fraunces = títulos (serifada, com personalidade, clima de
+     revista/jornal acadêmico).
+     Manrope = texto e interface (sans-serif limpa, lê bem em
+     telas pequenas).
+     ============================================================ */
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+  /* ============================================================
+     1. RESET BÁSICO
+     Zera margem/padding padrão do navegador e deixa o
+     box-sizing previsível (padding e borda já contam dentro
+     da largura definida, em vez de somar por fora).
+     ============================================================ */
+  *, *::before, *::after { box-sizing: border-box; }
+  body, h1, h2, h3, p, ul, form { margin: 0; }
+  ul { padding: 0; list-style: none; }
+  button { font: inherit; cursor: pointer; background: none; border: 0; }
+  a { color: inherit; text-decoration: none; }
+
+  :root {
+    /* vinho = cor principal da marca */
+    --cor-vinho: #b92e63;
+    --cor-vinho-destaque: #e7456e;
+    --cor-vinho-tinta: #2E1B24;
+
+    /* dourado = cor de apoio, usada só no selo de verificação */
+    --cor-adm:  #0044aa;
+    --cor-dourado: #D6A84F;
+
+    /* neutros */
+    --cor-tinta: #F2E8EB;           /* texto principal */
+    --cor-tinta-suave: #B7A3AC;     /* texto secundário (datas, legendas) */
+    --cor-papel: linear-gradient(30deg, #cf385e, #701028, #2f0000, #701028, #cf385e);           /* fundo da página */
+    --cor-cartao: #251A20;          /* fundo dos cartões */
+    --cor-linha: #4b3940;           /* bordas e divisórias */
+
+    /* outros tokens reaproveitados no site inteiro */
+    --raio: 14px;
+    --raio-pequeno: 8px;
+    --sombra: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+    --fonte-display: 'Lucida Sans', sans-serif;
+    --fonte-corpo: 'Manrope', system-ui, -apple-system, sans-serif;
+  }
+  /* ============================================================
+     4. BASE
+     ============================================================ */
+  html { color-scheme: light dark; }
+  body {
+    background: var(--cor-papel);
+    color: var(--cor-tinta);
+    font-family: var(--fonte-corpo);
+    line-height: 1.5;
+  }
+  h1, h2, h3 { font-family: var(--fonte-display); font-weight: 600; color: var(--cor-tinta); }
+
+  /* Respeita quem pediu menos movimento na tela do sistema
+     operacional (ajuda a cumprir o requisito de acessibilidade
+     do TCC, o RNF01) */
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+
+  /* Deixa o foco do teclado sempre visível, importante pra quem
+     navega sem mouse */
+  :focus-visible { outline: 2px solid var(--cor-vinho-destaque); outline-offset: 2px; }
+
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+
+  /* ============================================================
+     5. BOTÕES (reaproveitados em várias partes da página)
+     ============================================================ */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    padding: 10px 18px; border-radius: 999px; border: 1px solid transparent;
+    font-weight: 700; font-size: .9rem;
+    transition: transform .15s ease, background-color .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .btn:active { transform: scale(.97); }
+  .btn--vinho { background: var(--cor-vinho); color: #fff; }
+  .btn--contorno { background: transparent; border-color: var(--cor-linha); color: var(--cor-tinta); }
+  .btn--pequeno { padding: 6px 14px; font-size: .8rem; }
+  .btn--full { width: 100%; margin-top: 8px; }
+
+  /* ============================================================
+     6. CARTÃO - base usada pelo perfil, login, sugestões,
+     "em alta" e cada publicação da timeline
+     ============================================================ */
+  .cartao {
+    background: var(--cor-cartao);
+    border: 1px solid var(--cor-linha);
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .cartao h3 { font-size: 1rem; margin-bottom: 14px; }
+
+  /* ============================================================
+     7. AVATAR
+     Protótipo sem fotos de verdade ainda, então o "avatar" é só
+     a inicial da pessoa dentro de um círculo colorido.
+     ============================================================ */
+  .avatar {
+    border: 0; padding: 0; border-radius: 50%;
+    background: var(--cor-vinho); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--fonte-display); font-weight: 700; flex-shrink: 0;
+  }
+  .avatar--pequeno { width: 40px; height: 40px; font-size: .85rem; }
+  .avatar--grande {
+    width: 72px; height: 72px; font-size: 1.4rem;
+    margin: -36px auto 10px; border: 4px solid var(--cor-cartao);
+  }
+  .avatar--destaque { background: var(--cor-vinho-destaque); }
+
+  /* ============================================================
+     8. SELO DE VERIFICAÇÃO E TAG "EM ANÁLISE"
+     O selo (vinho + dourado) é o elemento de assinatura visual
+     do protótipo: é a versão em interface do objetivo específico
+     "avaliação de veracidade de projetos" que está no TCC de
+     vocês. Pesquisadores/artigos já avaliados pela comunidade
+     ganham o selo; os que ainda não foram avaliados mostram a
+     tag "em análise" no lugar.
+     ============================================================ */
+  .tag-analise {
+    font-size: .7rem; color: var(--cor-tinta-suave);
+    border: 1px solid var(--cor-linha); padding: 2px 8px; border-radius: 999px;
+  }
+
+  /* ============================================================
+     9. BARRA DE NAVEGAÇÃO
+     ============================================================ */
+  .navbar {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; gap: 20px;
+    padding: 12px 24px;
+    background: var(--cor-cartao);
+    border-bottom: 1px solid var(--cor-linha);
+  }
+  .navbar__marca {
+    display: flex; align-items: center; gap: 8px;
+    font-family: var(--fonte-display); font-weight: 700; font-size: 1.3rem;
+    color: var(--cor-vinho); white-space: nowrap;
+  }
+  .navbar__marca span {
+    width: 10px; height: 10px; border-radius: 50%; background: var(--cor-adm);
+  }
+  .navbar__busca {
+    flex: 1 1 auto; min-width: 0; max-width: 420px;
+    display: flex; align-items: center; gap: 8px;
+    background: var(--cor-vinho-tinta); border-radius: 999px; padding: 9px 16px;
+  }
+  .navbar__busca svg { color: var(--cor-tinta-suave); flex-shrink: 0; }
+  .navbar__busca input {
+    border: 0; background: transparent; outline: none; width: 100%;
+    font-family: var(--fonte-corpo); font-size: .9rem; color: var(--cor-tinta);
+  }
+  .navbar__acoes { display: flex; align-items: center; gap: 12px; margin-left: auto; }
+  .navbar__icone {
+    color: var(--cor-tinta); padding: 6px; border-radius: 50%; display: flex;
+  }
+
+  /* ============================================================
+     11. LAYOUT PRINCIPAL - as 3 colunas depois da navbar
+     ============================================================ */
+  .layout {
+    max-width: 1180px; margin: 0 auto; padding: 24px 20px 60px;
+    display: grid; grid-template-columns: 260px minmax(0, 1fr) 300px;
+    gap: 24px; align-items: start;
+  }
+
+  /* ============================================================
+     12. COLUNA ESQUERDA - cartão de perfil
+     ============================================================ */
+  .cartao-perfil { text-align: center; overflow: hidden; }
+  .cartao-perfil__capa {
+    height: 60px; margin: -20px -20px 0;
+    background: linear-gradient(120deg, var(--cor-vinho), var(--cor-vinho-destaque));
+  }
+  .cartao-perfil__curso { color: var(--cor-tinta-suave); font-size: .85rem; margin-top: 4px; }
+  .cartao-perfil__stats {
+    display: flex; justify-content: center; gap: 18px; margin: 16px 0; padding: 14px 0;
+    border-top: 1px solid var(--cor-linha); border-bottom: 1px solid var(--cor-linha);
+    font-size: .8rem; color: var(--cor-tinta-suave);
+  }
+  .cartao-perfil__stats strong { display: block; color: var(--cor-tinta); font-size: 1rem; }
+  .cartao-perfil__links { display: flex; flex-direction: column; gap: 2px; text-align: left; margin-top: 14px; }
+  .cartao-perfil__links a { padding: 8px 6px; border-radius: var(--raio-pequeno); font-size: .88rem; font-weight: 600; display: block; }
+
+  /* ============================================================
+     13. CARTÃO DE LOGIN
+     Aparece no lugar do perfil (coluna esquerda) e no lugar das
+     sugestões (coluna direita) pra quem não está logado.
+     ============================================================ */
+  .cartao-login p { font-size: .85rem; color: var(--cor-tinta-suave); margin-bottom: 4px; }
+
+  .formulario-iframe {
+    display: block; width: 100%; height: 430px;
+    border: 0; background: transparent;
+  }
+
+  /* Campos do formulário de cadastro (usado dentro de cadastro.html,
+     que é carregado via iframe no cartão "Criar conta") */
+  .campo { text-align: left; margin-bottom: 12px; }
+  .campo label {
+    display: block; font-size: .78rem; font-weight: 600;
+    color: var(--cor-tinta-suave); margin-bottom: 4px;
+  }
+  .campo input {
+    width: 100%; padding: 9px 12px; border-radius: var(--raio-pequeno);
+    border: 1px solid var(--cor-linha); background: var(--cor-vinho-tinta);
+    color: var(--cor-tinta); font-family: var(--fonte-corpo); font-size: .88rem;
+  }
+  .campo input:focus { border-color: var(--cor-vinho-destaque); outline: none; }
+
+  /* Cartão que contém o iframe do cadastro.html */
+  .cartao-cadastro-iframe { padding-bottom: 16px; }
+  .cartao-cadastro-iframe #iframe-cadastro {
+    display: block; width: 100%; height: 430px;
+    border: 0; background: transparent;
+  }
+  .cartao-cadastro-iframe #iframe-login{
+    display: block; width: 100%; height: 220px;
+    border: 0; background: transparent;
+  }
+
+  /* ============================================================
+     14. COLUNA CENTRAL - timeline
+     ============================================================ */
+  .post__cabecalho { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .post__cabecalho strong { display: inline-flex; align-items: center; gap: 5px; }
+  .post__cabecalho > div > span { display: block; font-size: .78rem; color: var(--cor-tinta-suave); }
+  .post__titulo { font-size: 1.15rem; margin-bottom: 8px; }
+  .post__resumo { font-size: .92rem; margin-bottom: 12px; }
+  .post__tags { display: flex; gap: 8px; margin-bottom: 14px; }
+  .tag {
+    background: var(--cor-vinho-tinta); color: var(--cor-vinho-destaque);
+    font-size: .75rem; font-weight: 700; padding: 4px 10px; border-radius: 999px;
+  }
+  .post__rodape {
+    display: flex; align-items: center; gap: 20px; padding-top: 14px;
+    border-top: 1px solid var(--cor-linha); font-size: .82rem; color: var(--cor-tinta-suave);
+  }
+  .post__rodape button { display: flex; align-items: center; gap: 5px; }
+  .avaliacao { color: var(--cor-dourado); letter-spacing: 1px; }
+  .avaliacao span { color: var(--cor-tinta-suave); letter-spacing: normal; margin-left: 4px; }
+
+  /* ============================================================
+     15. COLUNA DIREITA - sugestões e "em alta"
+     ============================================================ */
+  .lista-sugestoes li { display: flex; align-items: center; gap: 10px; padding: 10px 0; }
+  .lista-sugestoes li + li { border-top: 1px solid var(--cor-linha); }
+  .lista-sugestoes li > div:nth-child(2) { flex: 1; min-width: 0; }
+  .lista-sugestoes strong { display: block; font-size: .88rem; }
+  .lista-sugestoes span { font-size: .78rem; color: var(--cor-tinta-suave); }
+
+  .lista-trending li { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; padding: 10px 0; }
+  .lista-trending li + li { border-top: 1px solid var(--cor-linha); }
+  .trending__categoria { font-size: .72rem; color: var(--cor-tinta-suave); }
+  .lista-trending strong { font-family: var(--fonte-display); color: var(--cor-vinho-destaque); font-size: .95rem; }
+  .trending__contagem { font-size: .75rem; color: var(--cor-tinta-suave); }
+
+  /* ============================================================
+     16. ESTADO LOGADO / DESLOGADO
+     Não precisa de CSS aqui: os elementos que dependem de login
+     usam o atributo nativo "hidden" (controlado pelo JS lá
+     embaixo), que o próprio navegador já trata como
+     display:none. Isso evita ficar duplicando classe de exibição
+     pra cada tipo de elemento (cartão, botão, avatar...).
+     ============================================================ */
+
+  /* ============================================================
+     17. RESPONSIVIDADE (RNF03 do TCC de vocês)
+     Empilha as 3 colunas numa só e reordena com a timeline
+     primeiro, já que é o conteúdo principal pra quem acessa
+     pelo celular.
+     ============================================================ */
+  @media (max-width: 960px) {
+    .layout { grid-template-columns: 1fr; }
+    .coluna--central { order: 1; }
+    .coluna--esquerda { order: 2; }
+    .coluna--direita { order: 3; }
+  }
+  @media (max-width: 640px) {
+    .navbar { gap: 12px; padding: 10px 14px; }
+    .navbar__marca { font-size: 1.1rem; }
+    .layout { padding: 16px 14px 40px; }
+  }
+
+
+/* ============================================================
+   IFRAME DE CADASTRO NA COLUNA ESQUERDA
+   ============================================================ */
+.coluna--esquerda #iframe-cadastro {
+  display: block;
+  width: 100%;
+  height: 430px;
+  border: 1px solid var(--cor-linha);
+  border-radius: var(--raio);
+  background: var(--cor-cartao);
+  box-shadow: var(--sombra);
+}
+.coluna--esquerda #iframe-login {
+  display: block;
+  width: 100%;
+  height: 290px;
+  border: 1px solid var(--cor-linha);
+  border-radius: var(--raio);
+  background: var(--cor-cartao);
+  box-shadow: var(--sombra);
+}

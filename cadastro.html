@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Criar conta</title>
+    <link href="styletcc.css" rel="stylesheet">
+    <style>
+      /* Estilos específicos deste documento (só fazem sentido aqui
+         dentro, por isso não foram para o style.css compartilhado) */
+      html, body {
+        background: transparent;
+        margin: 0;
+        padding: 0;
+      }
+      body { padding: 4px 2px; }
+      h3 { margin-bottom: 14px; }
+    </style>
+  </head>
+  <body>
+    <h3 align="center">Criar conta</h3>
+    <form id="form-cadastro" method="post" action="dados.php">
+      <p class="campo">
+        <label for="Nome">Nome</label>
+        <input type="text" id="Nome" name="Nome" placeholder="Digite seu nome" required>
+      </p>
+      <p class="campo">
+        <label for="Email">Email</label>
+        <input type="email" id="Email" name="Email" placeholder="Digite seu email" required>
+      </p>
+      <p class="campo">
+        <label for="DtNas">Data de nascimento</label>
+        <input type="date" id="DtNas" name="DtNas" required>
+      </p>
+      <p class="campo">
+        <label for="Senha">Senha</label>
+        <input type="password" id="Senha" name="Senha" placeholder="Crie uma senha!" required>
+      </p>
+      <button type="submit" class="btn btn--vinho btn--full">Cadastrar</button>
+    </form>
+
+    <script>
+      // ============================================================
+      // Envia os dados para dados.php via fetch (sem recarregar) e,
+      // se o cadastro tiver dado certo, avisa a página que carregou
+      // este iframe (window.parent) para ela voltar ao cartão de
+      // login. Se este arquivo for aberto sozinho (fora de um
+      // iframe), window.parent === window e o postMessage não faz
+      // nada de mal, então funciona nos dois casos.
+      // ============================================================
+      document.getElementById('form-cadastro').addEventListener('submit', async (evento) => {
+        evento.preventDefault();
+        const form = evento.target;
+        const dados = new FormData(form);
+
+        try {
+          const resposta = await fetch(form.action, {
+            method: 'POST',
+            body: dados,
+          });
+
+          if (resposta.ok) {
+            alert('Cadastro realizado com sucesso!');
+            form.reset();
+            window.parent.postMessage('cadastro-concluido', window.location.origin);
+          } else {
+            alert('Não foi possível concluir o cadastro. Tente novamente.');
+          }
+        } catch (erro) {
+          alert('Erro de conexão. Verifique sua internet e tente novamente.');
+        }
+      });
+    </script>
+  </body>
+</html>

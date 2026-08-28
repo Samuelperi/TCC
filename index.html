@@ -1,32 +1,255 @@
 <!DOCTYPE html>
-<html lang="ptbr">
-    <head>
-        <title></title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="style.css" rel="stylesheet">
-    </head>
-    <body>
-        <div class="div1">
-            <fieldset>
-                <h1>Cadastro</h1>
-                <form method="post" action="dados.php" >
-                    <p><label for="Nome">Nome:</label>
-                    <input type="text" id="Nome" name="Nome" placeholder="Digite seu nome" required></p>
-    
-                    <p><label for="Email">Email:</label>
-                    <input type="text" id="Email" name="Email" placeholder="Digite seu email" required></p>
-    
-                    <p><label for="DtNas">Data de nascimento:</label>
-                    <input type="date" id="DtNas" name="DtNas" required></p>
-    
-                    <p><label for="Senha">Senha:</label>
-                    <input type="password" id="Senha" name="Senha" placeholder="Crie uma senha!" required></p>
-    
-                    <input type="submit" value="CADASTRAR" class="button">
-                </form>
-            </fieldset>
+<html lang="pt-BR" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nexo · Rede Social Acadêmica (protótipo)</title>
+
+<link href="styletcc.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ============================================================
+       BARRA DE NAVEGAÇÃO
+       ============================================================ -->
+  <header class="navbar">
+    <div class="navbar__marca">
+      <span aria-hidden="true"></span>
+      Chagasnet
+    </div>
+
+    <form class="navbar__busca" role="search">
+      <label for="campo-busca" class="sr-only">Buscar artigos, pesquisadores ou temas</label>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input id="campo-busca" type="search" placeholder="Buscar artigos, pesquisadores ou temas" />
+    </form>
+
+    <div class="navbar__acoes">
+      <button type="button" class="navbar__icone" aria-label="Início" title="Início">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 11l9-8 9 8"></path>
+          <path d="M5 10v10h5v-6h4v6h5V10"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+  <!-- ============================================================
+       LAYOUT PRINCIPAL: 3 colunas
+       ============================================================ -->
+  <div class="layout">
+    <!-- ========================================================
+         COLUNA ESQUERDA
+         ======================================================== -->
+    <aside class="coluna coluna--esquerda">
+        <div id="container" class="cartao cartao-login">
+          <h3>Entre para ver seu perfil</h3>
+          <p>Monte seu currículo digital, publique pesquisas e acompanhe suas conexões.</p>
+          <button id="botao-criar-conta" class="btn btn--vinho btn--full" onclick="substituirPorIframe('cadastro.html')">Cadastre-se</button>
+          <button id="botao-login" class="btn btn--vinho btn--full" onclick="substituirPorIframe('Login.html')">Login</button>
+      </div>
+
+      <script>
+        function substituirPorIframe(url) {
+        const container = document.getElementById("container");
+
+        // Limpa o conteúdo da div
+        container.innerHTML = "";
+
+        // Cria o iframe
+        const iframe = document.createElement("iframe");
+        iframe.src = url;
+        iframe.loading = "lazy";
+        iframe.title = "Formulário";
+        iframe.className = "formulario-iframe";
+
+        // Adiciona o iframe na div
+        container.appendChild(iframe);
+      }
+      </script>
+
+    </aside>
+    <!-- ========================================================
+         COLUNA CENTRAL: timeline
+         ======================================================== -->
+    <main class="coluna coluna--central">
+      <h1 class="sr-only">Linha do tempo</h1>
+
+      <!-- Publicação 1 -->
+      <article class="cartao post">
+        <header class="post__cabecalho">
+          <div class="avatar avatar--pequeno" aria-hidden="true">RS</div>
+          <div>
+            <strong>
+              Rafael Souza
+              <span class="selo-verificado" title="Pesquisador verificado pela comunidade">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 9 17 20 6"></polyline></svg>
+              </span>
+            </strong>
+            <span>Pós-doc em Ciência dos Materiais · INPE · 3h</span>
+          </div>
+        </header>
+
+        <h3 class="post__titulo">Novo revestimento pode dobrar a vida útil de baterias de íon-lítio</h3>
+        <p class="post__resumo">Testamos um revestimento cerâmico ultrafino nos eletrodos e o número de ciclos de carga subiu quase 90% em laboratório. Ainda em fase de validação, mas os primeiros resultados são bem animadores.</p>
+
+        <div class="post__tags">
+          <span class="tag">Materiais</span>
+          <span class="tag">Energia</span>
         </div>
-        <fieldset></fieldset>
-    </body>
+
+        <footer class="post__rodape">
+          <span class="avaliacao">★★★★☆ <span>4,6 (32 avaliações)</span></span>
+          <button type="button">💬 14 comentários</button>
+          <button type="button">🔁 Compartilhar</button>
+        </footer>
+      </article>
+
+      <!-- Publicação 2 -->
+      <article class="cartao post">
+        <header class="post__cabecalho">
+          <div class="avatar avatar--pequeno avatar--dourado" aria-hidden="true">BC</div>
+          <div>
+            <strong>
+              Beatriz Cardoso
+              <span class="selo-verificado" title="Pesquisadora verificada pela comunidade">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 9 17 20 6"></polyline></svg>
+              </span>
+            </strong>
+            <span>Doutoranda em Geociências · UFRGS · 6h</span>
+          </div>
+        </header>
+
+        <h3 class="post__titulo">Lacunas nos dados climáticos do Ártico afetam a precisão dos modelos globais</h3>
+        <p class="post__resumo">Levantamento com mais de 40 estações de monitoramento mostra falhas de cobertura que impactam previsões usadas até fora da região polar, inclusive na América do Sul.</p>
+
+        <div class="post__tags">
+          <span class="tag">Geociências</span>
+          <span class="tag">Clima</span>
+        </div>
+
+        <footer class="post__rodape">
+          <span class="avaliacao">★★★★★ <span>4,8 (51 avaliações)</span></span>
+          <button type="button">💬 27 comentários</button>
+          <button type="button">🔁 Compartilhar</button>
+        </footer>
+      </article>
+
+      <!-- Publicação 3 -->
+      <article class="cartao post">
+        <header class="post__cabecalho">
+          <div class="avatar avatar--pequeno avatar--destaque" aria-hidden="true">DM</div>
+          <div>
+            <strong>
+              Diego Martins
+              <span class="tag-analise">em análise</span>
+            </strong>
+            <span>Mestrando em Ciência da Computação · IFSP · 1 dia</span>
+          </div>
+        </header>
+
+        <h3 class="post__titulo">Dataset aberto de Libras alcança 10 mil vídeos catalogados</h3>
+        <p class="post__resumo">O projeto reúne sinais de Libras gravados por falantes nativos e já está sendo usado em três pesquisas de reconhecimento automático de sinais no Brasil.</p>
+
+        <div class="post__tags">
+          <span class="tag">Computação</span>
+          <span class="tag">Acessibilidade</span>
+        </div>
+
+        <footer class="post__rodape">
+          <span class="avaliacao">★★★★★ <span>4,9 (63 avaliações)</span></span>
+          <button type="button">💬 40 comentários</button>
+          <button type="button">🔁 Compartilhar</button>
+        </footer>
+      </article>
+
+    </main>
+
+    <!-- ========================================================
+         COLUNA DIREITA
+         ======================================================== -->
+    <aside class="coluna coluna--direita">
+
+      <!-- Sugestões pra seguir: só aparece pra quem está logado -->
+      <div id="cartao-sugestoes" class="cartao" hidden>
+        <h3>Sugestões para seguir</h3>
+        <ul class="lista-sugestoes">
+          <li>
+            <div class="avatar avatar--pequeno avatar--dourado" aria-hidden="true">JP</div>
+            <div>
+              <strong>Juliana Prado</strong>
+              <span>Ecologia · UFMG</span>
+            </div>
+            <button type="button" class="btn btn--contorno btn--pequeno">Seguir</button>
+          </li>
+          <li>
+            <div class="avatar avatar--pequeno avatar--destaque" aria-hidden="true">TA</div>
+            <div>
+              <strong>Thiago Almeida</strong>
+              <span>Física · UFSC</span>
+            </div>
+            <button type="button" class="btn btn--contorno btn--pequeno">Seguir</button>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Cartão de login: aparece no lugar das sugestões pra quem não está logado -->
+      <div id="cartao-login-direita" class="cartao cartao-login">
+        <h3>Encontre pesquisadores da sua área</h3>
+        <p>Faça login para receber sugestões personalizadas de quem seguir.</p>
+        <button type="button" class="btn btn--vinho btn--full js-entrar-demo">Entrar</button>
+      </div>
+
+      <!-- "Em alta": sempre visível, mesmo sem login -->
+      <div class="cartao">
+        <h3>Em alta</h3>
+        <ul class="lista-trending">
+          <li>
+            <span class="trending__categoria">Assunto do momento · Energia</span>
+            <strong>#BateriasSustentáveis</strong>
+            <span class="trending__contagem">1,2 mil publicações</span>
+          </li>
+          <li>
+            <span class="trending__categoria">Em alta · Ciência aberta</span>
+            <strong>#DadosAbertos</strong>
+            <span class="trending__contagem">890 publicações</span>
+          </li>
+          <li>
+            <span class="trending__categoria">Em alta · Tecnologia assistiva</span>
+            <strong>#AcessibilidadeDigital</strong>
+            <span class="trending__contagem">640 publicações</span>
+          </li>
+          <li>
+            <span class="trending__categoria">Em alta · Geociências</span>
+            <strong>#DadosDoÁrtico</strong>
+            <span class="trending__contagem">410 publicações</span>
+          </li>
+        </ul>
+      </div>
+
+    </aside>
+
+  </div>
+
+  <script>
+    // Evita o recarregamento da página ao pressionar Enter na busca.
+    const busca = document.querySelector('.navbar__busca');
+
+    if (busca) {
+      busca.addEventListener('submit', (evento) => {
+        evento.preventDefault();
+      });
+    }
+
+    // Recebe a confirmação enviada pelo cadastro.html.
+    window.addEventListener('message', (evento) => {
+      if (evento.data === 'cadastro-concluido') {
+        console.log('Cadastro concluído.');
+      }
+    });
+  </script>
+
+</body>
 </html>
